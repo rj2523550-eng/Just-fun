@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Comments - Instagram Reels</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .comments-container {
+            width: 100vw;
+            height: 100vh;
+            background: #181818;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* TOP BAR */
+        .comments-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 0.5px solid #2a2a2a;
+            background: #181818;
+        }
+
+        .back-btn {
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* COMMENTS LIST */
+        .comments-list {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .comment-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #333;
+            flex-shrink: 0;
+        }
+
+        .comment-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #eee;
+        }
+
+        .comment-text {
+            font-size: 13px;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        .comment-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 11px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .reply-btn {
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .comment-like {
+            font-size: 14px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .comment-like.liked {
+            color: #ff3040;
+        }
+
+        /* INPUT BAR */
+        .input-bar {
+            padding: 12px 15px;
+            background: #121212;
+            border-top: 0.5px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-my-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #0095f6;
+            flex-shrink: 0;
+        }
+
+        .comment-input {
+            flex: 1;
+            background: #262626;
+            border: none;
+            outline: none;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .post-btn {
+            color: #0095f6;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="comments-container">
+        
+        <!-- HEADER -->
+        <div class="comments-header">
+            <a href="index.html" class="back-btn">←</a>
+            <span class="header-title">कमेंट्स</span>
+            <span style="width: 20px;"></span>
+        </div>
+
+        <!-- COMMENTS LIST -->
+        <div class="comments-list" id="commentsList">
+            <div class="comment-item">
+                <div class="avatar"></div>
+                <div class="comment-content">
+                    <span class="user-name">rahul_01</span>
+                    <span class="comment-text">बहुत ही बढ़िया रील्स है brother! 🔥🚀</span>
+                    <div class="comment-meta">
+                        <span>2h</span>
+                        <span class="reply-btn">Reply</span>
+                    </div>
+                </div>
+                <span class="comment-like" onclick="toggleCommentLike(this)">🤍</span>
+            </div>
+
+            <div class="comment-item">
+                <div class="avatar"></div>
+                <div class="comment-content">
+                    <span class="user-name">priya_v</span>
+                    <span class="comment-text">editing ekdam next level hai! 👌</span>
+                    <div class="comment-meta">
+                        <span>1h</span>
+                        <span class="reply-btn">Reply</span>
+                    </div>
+                </div>
+                <span class="comment-like" onclick="toggleCommentLike(this)">🤍</span>
+            </div>
+        </div>
+
+        <!-- INPUT BOX -->
+        <div class="input-bar">
+            <div class="user-my-avatar"></div>
+            <input type="text" class="comment-input" id="commentInput" placeholder="@creator_official के लिए कमेंट लिखें...">
+            <span class="post-btn" id="postBtn">Post</span>
+        </div>
+
+    </div>
+
+    <script>
+        const commentInput = document.getElementById('commentInput');
+        const postBtn = document.getElementById('postBtn');
+        const commentsList = document.getElementById('commentsList');
+
+        // कमेंट लाइक करने का फंक्शन
+        function toggleCommentLike(element) {
+            if (element.classList.contains('liked')) {
+                element.classList.remove('liked');
+                element.textContent = '🤍';
+            } else {
+                element.classList.add('liked');
+                element.textContent = '❤️';
+            }
+        }
+
+        // नया कमेंट जोड़ने का फंक्शन
+        postBtn.addEventListener('click', postComment);
+
+        commentInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') postComment();
+        });
+
+        function postComment() {
+            const text = commentInput.value.trim();
+            if (text !== "") {
+                const newComment = document.createElement('div');
+                newComment.classList.add('comment-item');
+                newComment.innerHTML = `
+                    <div class="avatar" style="background:#0095f6;"></div>
+                    <div class="comment-content">
+                        <span class="user-name">you (आप)</span>
+                        <span class="comment-text">${text}</span>
+                        <div class="comment-meta">
+                            <span>Just now</span>
+                            <span class="reply-btn">Reply</span>
+                        </div>
+                    </div>
+                    <span class="comment-like" onclick="toggleCommentLike(this)">🤍</span>
+                `;
+                commentsList.appendChild(newComment);
+                commentInput.value = "";
+                commentsList.scrollTop = commentsList.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
+
