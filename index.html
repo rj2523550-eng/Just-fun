@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Instagram Reels UI Clone</title>
+    <title>Instagram Reels App</title>
     <style>
         * {
             margin: 0;
@@ -11,6 +11,7 @@
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             -webkit-tap-highlight-color: transparent;
+            text-decoration: none;
         }
 
         html, body {
@@ -40,7 +41,7 @@
             right: 0;
             z-index: 20;
             padding: 15px 16px 10px 16px;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
         }
 
         .header-top-row {
@@ -53,8 +54,7 @@
         .app-title {
             font-size: 22px;
             font-weight: 700;
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: #fff;
         }
 
         .top-icons {
@@ -66,13 +66,7 @@
 
         .icon-btn {
             position: relative;
-            cursor: pointer;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-            transition: transform 0.2s ease;
-        }
-
-        .icon-btn:active {
-            transform: scale(0.85);
+            color: #fff;
         }
 
         .unread-badge {
@@ -85,7 +79,6 @@
             font-weight: bold;
             padding: 2px 5px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(255, 48, 64, 0.5);
         }
 
         /* STORIES BAR */
@@ -109,7 +102,6 @@
             color: #fff;
             flex-shrink: 0;
             width: 62px;
-            cursor: pointer;
         }
 
         .story-ring {
@@ -119,7 +111,6 @@
             padding: 2px;
             background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
             margin-bottom: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
         .story-ring.my-story {
@@ -140,7 +131,6 @@
             justify-content: center;
             align-items: center;
             font-size: 12px;
-            font-weight: bold;
             border: 2px solid #000;
         }
 
@@ -158,10 +148,9 @@
             text-overflow: ellipsis;
             width: 100%;
             text-align: center;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
 
-        /* 2. VIDEO AREA & DOUBLE TAP HEART ANIMATION */
+        /* 2. VIDEO AREA */
         .video-feed {
             position: absolute;
             top: 0;
@@ -173,7 +162,6 @@
             justify-content: center;
             align-items: center;
             z-index: 1;
-            cursor: pointer;
         }
 
         .video-feed video {
@@ -182,7 +170,6 @@
             object-fit: cover;
         }
 
-        /* Double Tap Popup Heart Animation */
         .pop-heart {
             position: absolute;
             font-size: 90px;
@@ -190,9 +177,8 @@
             opacity: 0;
             transform: scale(0);
             pointer-events: none;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            transition: transform 0.2s ease, opacity 0.3s ease;
             z-index: 5;
-            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
         }
 
         .pop-heart.active {
@@ -200,7 +186,7 @@
             transform: scale(1.2);
         }
 
-        /* 3. RIGHT SIDEBAR (Attractive Instagram Buttons) */
+        /* 3. RIGHT SIDEBAR */
         .right-sidebar {
             position: absolute;
             right: 12px;
@@ -218,7 +204,7 @@
             align-items: center;
             font-size: 12px;
             font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            color: #fff;
         }
 
         .action-icon {
@@ -234,26 +220,16 @@
             margin-bottom: 4px;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: all 0.2s ease;
         }
 
-        .action-icon:active {
-            transform: scale(0.85);
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        /* Active/Liked/Saved States */
         .action-icon.liked {
             color: #ff3040;
             background: rgba(255, 48, 64, 0.2);
-            border-color: rgba(255, 48, 64, 0.4);
         }
 
         .action-icon.saved {
             color: #ffd700;
             background: rgba(255, 215, 0, 0.2);
-            border-color: rgba(255, 215, 0, 0.4);
         }
 
         .audio-disc {
@@ -262,8 +238,6 @@
             border-radius: 50%;
             border: 2px solid #fff;
             background: #222;
-            margin-top: 5px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
             animation: spin 3s linear infinite;
         }
 
@@ -278,7 +252,6 @@
             bottom: 75px;
             right: 80px;
             z-index: 20;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
         }
 
         .user-profile {
@@ -294,36 +267,32 @@
             border-radius: 50%;
             background: #444;
             border: 1.5px solid #fff;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
         }
 
         .username-text {
             font-weight: 600;
             font-size: 14px;
+            color: #fff;
         }
 
         .follow-btn {
             border: 1px solid rgba(255, 255, 255, 0.8);
             background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
             color: #fff;
             padding: 4px 12px;
             border-radius: 8px;
             font-size: 11px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
 
         .follow-btn.following {
             background: rgba(255, 255, 255, 0.2);
-            border-color: transparent;
         }
 
         .caption-text {
             font-size: 13px;
             margin-bottom: 10px;
-            line-height: 1.4;
             color: #f1f1f1;
         }
 
@@ -342,7 +311,6 @@
             width: 100%;
             height: 55px;
             background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -353,13 +321,10 @@
         .nav-btn {
             font-size: 22px;
             color: #8e8e8e;
-            cursor: pointer;
-            transition: transform 0.2s ease, color 0.2s ease;
         }
 
-        .nav-btn.active, .nav-btn:active {
+        .nav-btn.active {
             color: #fff;
-            transform: scale(1.1);
         }
 
         .create-plus-btn {
@@ -373,13 +338,6 @@
             color: #000;
             font-size: 20px;
             font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0, 242, 254, 0.3);
-            transition: transform 0.2s ease;
-        }
-
-        .create-plus-btn:active {
-            transform: scale(0.9);
         }
     </style>
 </head>
@@ -387,45 +345,38 @@
 
     <div class="app-container">
         
-        <!-- TOP HEADER & STORIES -->
+        <!-- TOP HEADER -->
         <div class="top-header">
             <div class="header-top-row">
                 <div class="app-title">Reels</div>
                 <div class="top-icons">
-                    <span class="icon-btn" id="cameraBtn">📷</span>
-                    <span class="icon-btn" id="messageBtn">💬 <span class="unread-badge">3</span></span>
+                    <a href="camera.html" class="icon-btn" id="cameraBtn">📷</a>
+                    <!-- मैसेजिंग पेज की अलग लिंक -->
+                    <a href="chat.html" class="icon-btn" id="messageBtn">💬 <span class="unread-badge">3</span></a>
                 </div>
             </div>
 
             <!-- STORIES BAR -->
             <div class="stories-bar">
-                <div class="story-item">
+                <a href="add-story.html" class="story-item">
                     <div class="story-ring my-story">
                         <div class="story-avatar"></div>
                         <div class="add-icon">+</div>
                     </div>
                     <span class="story-username">आपकी स्टोरी</span>
-                </div>
-                <div class="story-item">
+                </a>
+                <a href="story.html?user=rahul_01" class="story-item">
                     <div class="story-ring"><div class="story-avatar"></div></div>
                     <span class="story-username">rahul_01</span>
-                </div>
-                <div class="story-item">
+                </a>
+                <a href="story.html?user=priya_v" class="story-item">
                     <div class="story-ring"><div class="story-avatar"></div></div>
                     <span class="story-username">priya_v</span>
-                </div>
-                <div class="story-item">
-                    <div class="story-ring"><div class="story-avatar"></div></div>
-                    <span class="story-username">tech_guy</span>
-                </div>
-                <div class="story-item">
-                    <div class="story-ring"><div class="story-avatar"></div></div>
-                    <span class="story-username">vlogs_in</span>
-                </div>
+                </a>
             </div>
         </div>
 
-        <!-- VIDEO AREA (Real Video Stream) -->
+        <!-- VIDEO AREA -->
         <div class="video-feed" id="videoFeed">
             <video id="myVideo" autoplay loop muted playsinline>
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-1232-large.mp4" type="video/mp4">
@@ -433,34 +384,36 @@
             <div class="pop-heart" id="popHeart">❤️</div>
         </div>
 
-        <!-- RIGHT SIDEBAR (Interactive Buttons with IDs) -->
+        <!-- RIGHT SIDEBAR (अलग-अलग फाइल्स की लिंक्स) -->
         <div class="right-sidebar">
             <div class="action-item">
                 <span class="action-icon" id="likeBtn">🤍</span>
                 <span id="likeCount">24.8K</span>
             </div>
-            <div class="action-item">
+            <!-- कमेंट्स की अलग फाइल link -->
+            <a href="comments.html" class="action-item">
                 <span class="action-icon" id="commentBtn">💬</span>
                 <span>1,200</span>
-            </div>
-            <div class="action-item">
+            </a>
+            <!-- शेयर की अलग फाइल link -->
+            <a href="share.html" class="action-item">
                 <span class="action-icon" id="shareBtn">✈️</span>
                 <span>Share</span>
-            </div>
+            </a>
             <div class="action-item">
                 <span class="action-icon" id="saveBtn">🔖</span>
                 <span>Save</span>
             </div>
-            <div class="action-item">
+            <a href="audio.html" class="action-item">
                 <div class="audio-disc"></div>
-            </div>
+            </a>
         </div>
 
         <!-- BOTTOM DETAILS -->
         <div class="bottom-details">
             <div class="user-profile">
-                <div class="user-pic"></div>
-                <span class="username-text">@creator_official</span>
+                <a href="profile.html?user=creator_official" class="user-pic"></a>
+                <a href="profile.html?user=creator_official" class="username-text">@creator_official</a>
                 <button class="follow-btn" id="followBtn">Follow</button>
             </div>
             <div class="caption-text">
@@ -473,18 +426,17 @@
 
         <!-- BOTTOM NAVIGATION BAR -->
         <div class="bottom-navbar">
-            <div class="nav-btn active" id="homeBtn">🏠</div>
-            <div class="nav-btn" id="searchBtn">🔍</div>
-            <div class="create-plus-btn" id="createBtn">+</div>
-            <div class="nav-btn" id="notificationBtn">🔔</div>
-            <div class="nav-btn" id="profileBtn">👤</div>
+            <a href="index.html" class="nav-btn active">🏠</a>
+            <a href="search.html" class="nav-btn">🔍</a>
+            <a href="create.html" class="create-plus-btn">+</a>
+            <a href="notifications.html" class="nav-btn">🔔</a>
+            <a href="profile.html" class="nav-btn">👤</a>
         </div>
 
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- JavaScript code -->
     <script>
-        // सभी बटन्स के रिफरेंस
         const likeBtn = document.getElementById('likeBtn');
         const likeCountEl = document.getElementById('likeCount');
         const saveBtn = document.getElementById('saveBtn');
@@ -498,7 +450,6 @@
         let isFollowing = false;
         let count = 24800;
 
-        // 1. LIKE BUTTON LOGIC
         likeBtn.addEventListener('click', toggleLike);
 
         function toggleLike() {
@@ -515,7 +466,6 @@
             likeCountEl.textContent = (count / 1000).toFixed(1) + 'K';
         }
 
-        // 2. DOUBLE TAP ON VIDEO TO LIKE
         let lastTap = 0;
         videoFeed.addEventListener('click', function (e) {
             const currentTime = new Date().getTime();
@@ -525,7 +475,6 @@
                 if (!isLiked) toggleLike();
                 showPopHeart();
             } else {
-                // सिंगल टैप से वीडियो म्यूट/अनम्यूट
                 myVideo.muted = !myVideo.muted;
             }
             lastTap = currentTime;
@@ -538,18 +487,15 @@
             }, 800);
         }
 
-        // 3. SAVE / BOOKMARK LOGIC
         saveBtn.addEventListener('click', function() {
             isSaved = !isSaved;
             if (isSaved) {
                 saveBtn.classList.add('saved');
-                saveBtn.textContent = '🔖';
             } else {
                 saveBtn.classList.remove('saved');
             }
         });
 
-        // 4. FOLLOW BUTTON LOGIC
         followBtn.addEventListener('click', function() {
             isFollowing = !isFollowing;
             if (isFollowing) {
@@ -561,6 +507,6 @@
             }
         });
     </script>
-
 </body>
 </html>
+
