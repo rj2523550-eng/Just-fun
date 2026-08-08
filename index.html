@@ -2,66 +2,64 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Shorts App UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Instagram Reels UI Clone</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            background-color: #050505;
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
             color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            overflow: hidden;
         }
 
-        /* मोबाइल फ्रेम */
+        /* फुल-स्क्रीन ऐप कंटेनर */
         .app-container {
-            width: 380px;
-            height: 720px;
+            width: 100vw;
+            height: 100vh;
             background: #000;
             position: relative;
-            border-radius: 35px;
-            overflow: hidden;
-            border: 3px solid #222;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* 1. TOP BAR (ऊपर की पट्टी - लोगो, स्टोरीज, मैसेज) */
-        .top-section {
+        /* 1. TOP HEADER (Instagram स्टाइल) */
+        .top-header {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 10;
-            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-            padding: 15px 15px 5px 15px;
+            z-index: 20;
+            padding: 15px 16px 10px 16px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
         }
 
-        .header-bar {
+        .header-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
         }
 
-        .app-logo {
-            font-size: 20px;
-            font-weight: 800;
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .app-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .top-icons {
             display: flex;
-            gap: 15px;
+            gap: 20px;
+            align-items: center;
             font-size: 20px;
         }
 
@@ -70,11 +68,11 @@
             cursor: pointer;
         }
 
-        .badge {
+        .unread-badge {
             position: absolute;
             top: -4px;
             right: -6px;
-            background: #ff0050;
+            background: #ff3040;
             color: #fff;
             font-size: 10px;
             font-weight: bold;
@@ -82,34 +80,35 @@
             border-radius: 10px;
         }
 
-        /* STORIES BAR (WhatsApp / Insta स्टाइल स्टोरीज) */
-        .stories-container {
+        /* STORIES BAR (WhatsApp / Insta स्टाइल) */
+        .stories-bar {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             overflow-x: auto;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
             padding-bottom: 5px;
         }
 
-        .stories-container::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
+        .stories-bar::-webkit-scrollbar {
+            display: none;
         }
 
         .story-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 10px;
-            color: #ccc;
+            font-size: 11px;
+            color: #fff;
             flex-shrink: 0;
+            width: 62px;
         }
 
         .story-ring {
-            width: 48px;
-            height: 48px;
+            width: 58px;
+            height: 58px;
             border-radius: 50%;
             padding: 2px;
-            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
             margin-bottom: 4px;
         }
 
@@ -118,171 +117,181 @@
             position: relative;
         }
 
-        .add-story-plus {
+        .add-icon {
             position: absolute;
             bottom: 2px;
             right: 2px;
             background: #0095f6;
             color: #fff;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 12px;
+            font-weight: bold;
             border: 2px solid #000;
         }
 
-        .story-img {
+        .story-avatar {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: #333;
+            background: #262626;
             border: 2px solid #000;
         }
 
-        /* 2. MAIN VIDEO DISPLAY (वीडियो एरिया) */
-        .video-screen {
+        .story-username {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* 2. MAIN VIDEO FEED AREA */
+        .video-feed {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, #2a2a2a 0%, #111 100%);
+            background: #121212;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #555;
+            color: #666;
+            font-size: 16px;
+            z-index: 1;
+        }
+
+        /* 3. RIGHT SIDEBAR (Instagram Reels Actions) */
+        .right-sidebar {
+            position: absolute;
+            right: 12px;
+            bottom: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .action-icon {
+            font-size: 26px;
+            margin-bottom: 4px;
+            cursor: pointer;
+        }
+
+        .audio-disc {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            background: #333;
+            margin-top: 10px;
+        }
+
+        /* 4. BOTTOM LEFT DETAILS (Creator Info) */
+        .bottom-details {
+            position: absolute;
+            left: 16px;
+            bottom: 75px;
+            right: 80px;
+            z-index: 20;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .user-pic {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #444;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .username-text {
+            font-weight: 600;
             font-size: 14px;
         }
 
-        /* 3. RIGHT SIDEBAR (दाएँ तरफ के बटन्स) */
-        .right-actions {
-            position: absolute;
-            right: 12px;
-            bottom: 90px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .action-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .follow-btn {
+            border: 1px solid #fff;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 8px;
             font-size: 11px;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            font-weight: 600;
         }
 
-        .btn-circle {
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            margin-bottom: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .caption-text {
+            font-size: 13px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            color: #f1f1f1;
         }
 
-        /* 4. BOTTOM LEFT DETAILS (यूज़र डिटेल और कैप्शन) */
-        .bottom-info {
-            position: absolute;
-            left: 15px;
-            bottom: 75px;
-            right: 80px;
-            z-index: 10;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-        }
-
-        .user-row {
+        .audio-info {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #ff0050;
-        }
-
-        .user-name {
-            font-weight: 600;
-            font-size: 13px;
-        }
-
-        .follow-badge {
-            border: 1px solid #fff;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 600;
-        }
-
-        .video-caption {
             font-size: 12px;
-            margin-bottom: 8px;
-            line-height: 1.3;
-            color: #eee;
+            color: #e0e0e0;
         }
 
-        .audio-tag {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            color: #ccc;
-        }
-
-        /* 5. BOTTOM NAVIGATION (नेविगेशन बार) */
-        .bottom-nav-bar {
+        /* 5. BOTTOM NAVIGATION BAR */
+        .bottom-navbar {
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
+            height: 55px;
+            background: #000;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            border-top: 0.5px solid #222;
-            z-index: 10;
+            border-top: 0.5px solid #1a1a1a;
+            z-index: 30;
         }
 
-        .nav-tab {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 10px;
-            color: #777;
+        .nav-btn {
+            font-size: 22px;
+            color: #8e8e8e;
+            cursor: pointer;
         }
 
-        .nav-tab.active {
+        .nav-btn.active {
             color: #fff;
         }
 
-        .nav-tab .tab-icon {
-            font-size: 18px;
-            margin-bottom: 2px;
-        }
-
-        .plus-btn {
-            background: linear-gradient(45deg, #ff0050, #00f2fe);
-            width: 42px;
-            height: 28px;
+        .create-plus-btn {
+            width: 38px;
+            height: 26px;
             border-radius: 8px;
+            background: linear-gradient(45deg, #ff0050, #00f2fe);
             display: flex;
             justify-content: center;
             align-items: center;
             color: #000;
+            font-size: 20px;
             font-weight: bold;
-            font-size: 18px;
         }
     </style>
 </head>
@@ -290,112 +299,94 @@
 
     <div class="app-container">
         
-        <!-- [1] TOP SECTION (Header + Stories) -->
-        <div class="top-section">
-            <div class="header-bar">
-                <div class="app-logo">ShortsApp</div>
+        <!-- TOP HEADER & STORIES -->
+        <div class="top-header">
+            <div class="header-top-row">
+                <div class="app-title">Reels</div>
                 <div class="top-icons">
                     <span class="icon-btn">📷</span>
-                    <span class="icon-btn">⚡</span>
-                    <!-- मैसेजिंग (DM/Inbox) आइकन -->
-                    <span class="icon-btn">💬 <span class="badge">3</span></span>
+                    <span class="icon-btn">💬 <span class="unread-badge">3</span></span>
                 </div>
             </div>
 
-            <!-- STORIES BAR -->
-            <div class="stories-container">
-                <!-- आपकी स्टोरी जोड़ने का ऑप्शन -->
+            <!-- STORIES -->
+            <div class="stories-bar">
                 <div class="story-item">
                     <div class="story-ring my-story">
-                        <div class="story-img"></div>
-                        <div class="add-story-plus">+</div>
+                        <div class="story-avatar"></div>
+                        <div class="add-icon">+</div>
                     </div>
-                    <span>आपकी स्टोरी</span>
-                </div>
-
-                <!-- दोस्तों की स्टोरीज़ -->
-                <div class="story-item">
-                    <div class="story-ring"><div class="story-img"></div></div>
-                    <span>rahul_01</span>
+                    <span class="story-username">आपकी स्टोरी</span>
                 </div>
                 <div class="story-item">
-                    <div class="story-ring"><div class="story-img"></div></div>
-                    <span>priya_v</span>
+                    <div class="story-ring"><div class="story-avatar"></div></div>
+                    <span class="story-username">rahul_01</span>
                 </div>
                 <div class="story-item">
-                    <div class="story-ring"><div class="story-img"></div></div>
-                    <span>tech_guy</span>
+                    <div class="story-ring"><div class="story-avatar"></div></div>
+                    <span class="story-username">priya_v</span>
                 </div>
                 <div class="story-item">
-                    <div class="story-ring"><div class="story-img"></div></div>
-                    <span>vlogs_in</span>
+                    <div class="story-ring"><div class="story-avatar"></div></div>
+                    <span class="story-username">tech_guy</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-ring"><div class="story-avatar"></div></div>
+                    <span class="story-username">vlogs_in</span>
                 </div>
             </div>
         </div>
 
-        <!-- [2] MAIN VIDEO AREA -->
-        <div class="video-screen">
+        <!-- VIDEO FEED AREA -->
+        <div class="video-feed">
             [ फुल-स्क्रीन वीडियो प्ले एरिया ]
         </div>
 
-        <!-- [3] RIGHT SIDEBAR (Interactive Actions) -->
-        <div class="right-actions">
-            <div class="action-box">
-                <div class="btn-circle">❤️</div>
+        <!-- RIGHT SIDEBAR (ACTIONS) -->
+        <div class="right-sidebar">
+            <div class="action-item">
+                <span class="action-icon">❤️</span>
                 <span>24.8K</span>
             </div>
-            <div class="action-box">
-                <div class="btn-circle">💭</div>
+            <div class="action-item">
+                <span class="action-icon">💬</span>
                 <span>1,200</span>
             </div>
-            <div class="action-box">
-                <div class="btn-circle">🔖</div>
-                <span>Save</span>
-            </div>
-            <div class="action-box">
-                <div class="btn-circle">✈️</div>
+            <div class="action-item">
+                <span class="action-icon">✈️</span>
                 <span>Share</span>
             </div>
-            <div class="action-box">
-                <div class="btn-circle">🎵</div>
-                <span>Music</span>
+            <div class="action-item">
+                <span class="action-icon">🔖</span>
+                <span>Save</span>
+            </div>
+            <div class="action-item">
+                <div class="audio-disc"></div>
             </div>
         </div>
 
-        <!-- [4] BOTTOM LEFT DETAILS -->
-        <div class="bottom-info">
-            <div class="user-row">
-                <div class="user-avatar"></div>
-                <span class="user-name">@creator_official</span>
-                <span class="follow-badge">Follow</span>
+        <!-- BOTTOM DETAILS -->
+        <div class="bottom-details">
+            <div class="user-profile">
+                <div class="user-pic"></div>
+                <span class="username-text">@creator_official</span>
+                <button class="follow-btn">Follow</button>
             </div>
-            <div class="video-caption">
-                नया शार्ट वीडियो कैसा लगा? 🚀 #viral #trending #shorts
+            <div class="caption-text">
+                नया शार्ट वीडियो कैसा लगा? 🚀 #viral #trending #reels
             </div>
-            <div class="audio-tag">
+            <div class="audio-info">
                 🎵 <span>Original Sound - creator_official</span>
             </div>
         </div>
 
-        <!-- [5] BOTTOM NAVIGATION BAR -->
-        <div class="bottom-nav-bar">
-            <div class="nav-tab active">
-                <span class="tab-icon">🏠</span>
-                <span>Home</span>
-            </div>
-            <div class="nav-tab">
-                <span class="tab-icon">🔍</span>
-                <span>Discover</span>
-            </div>
-            <div class="plus-btn">+</div>
-            <div class="nav-tab">
-                <span class="tab-icon">🔔</span>
-                <span>Alerts</span>
-            </div>
-            <div class="nav-tab">
-                <span class="tab-icon">👤</span>
-                <span>Profile</span>
-            </div>
+        <!-- BOTTOM NAVIGATION BAR -->
+        <div class="bottom-navbar">
+            <div class="nav-btn active">🏠</div>
+            <div class="nav-btn">🔍</div>
+            <div class="create-plus-btn">+</div>
+            <div class="nav-btn">🔔</div>
+            <div class="nav-btn">👤</div>
         </div>
 
     </div>
